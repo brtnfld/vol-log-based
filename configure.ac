@@ -623,34 +623,34 @@ if test "x${have_qmcpack}" = xyes; then
 fi
 AM_CONDITIONAL(HAVE_QMCPACK, [test "x${have_qmcpack}" = xyes])
 
-have_hdf5io=no
-AC_ARG_ENABLE([test-hdf5-iotest],
-    [AS_HELP_STRING([--enable-test-hdf5-iotest],
-                    [Enable hdf5-iotest external test.
+have_hdf5api=no
+AC_ARG_ENABLE([test-hdf5api],
+    [AS_HELP_STRING([--enable-test-hdf5api],
+                    [Enable hdf5-api, external HDF5 VOL API tests.
                      @<:@default: disabled@:>@])],
-    [have_hdf5io=${enableval}], [have_hdf5io=no]
+    [have_hdf5api=${enableval}], [have_hdf5api=no]
 )
-if test "x${have_hdf5io}" = xyes; then
-   AC_MSG_CHECKING([downloading hdf5-iotest])
-   mkdir -p tests/external/hdf5_iotest
-   cd tests/external/hdf5_iotest
-   rm -rf ./hdf5-iotest
-   git clone -q https://github.com/HDFGroup/hdf5-iotest.git hdf5-iotest
-   AC_MSG_RESULT([github main branch])
+if test "x${have_hdf5api}" = xyes; then
+   AC_MSG_CHECKING([downloading hdf5])
+   mkdir -p tests/external/hdf5api
+   cd tests/external/hdf5api
+   rm -rf ./hdf5
+   git clone -q https://github.com/HDFGroup/hdf5.git hdf5
+   AC_MSG_RESULT([github develop branch])
    cd ../../..
-   AC_CHECK_FILE([tests/external/hdf5_iotest/hdf5-iotest/src/hdf5_iotest.c], [have_hdf5io=yes], [have_hdf5io=no])
-   if test "x${have_hdf5io}" = xyes; then
-      AC_MSG_NOTICE([configuring hdf5-iotest])
-      AC_CONFIG_COMMANDS(hdf5_iotest,[cd tests/external/hdf5_iotest && chmod 755 config.sh && ./config.sh && cd ../../..])
-      AC_CONFIG_LINKS([tests/external/hdf5_iotest/hdf5_iotest.m4:tests/external/hdf5_iotest/hdf5_iotest.m4])
+   AC_CHECK_FILE([tests/external/hdf5api/hdf5/test/API/CMakeLists.txt], [have_hdf5api=yes], [have_hdf5api=no])
+   if test "x${have_hdf5api}" = xyes; then
+      AC_MSG_NOTICE([configuring and building hdf5api])
+      AC_CONFIG_COMMANDS(hdf5api,[cd tests/external/hdf5api && chmod 755 config.sh && ./config.sh && cd ../../..])
+dnl      AC_CONFIG_LINKS([tests/external/hdf5_iotest/hdf5_iotest.m4:tests/external/hdf5_iotest/hdf5_iotest.m4])
    else
       AC_MSG_WARN([
          ------------------------------------------------------------
-         Test program source file not found. Disable hdf5-iotest test.
+         Test program source file not found. Disable hdf5api test.
          ------------------------------------------------------------])
    fi
 fi
-AM_CONDITIONAL(HAVE_HDF5_IOTEST, [test "x${have_hdf5io}" = xyes])
+AM_CONDITIONAL(HAVE_HDF5API, [test "x${have_hdf5api}" = xyes])
 
 have_openpmd=no
 AC_ARG_ENABLE([test-openpmd],
@@ -739,8 +739,8 @@ AC_CONFIG_FILES(Makefile \
                 tests/passthru/Makefile \
                 cache.cfg \
                 tests/read_regular/Makefile \
-                tests/external/hdf5_iotest/config.sh \
-                tests/external/hdf5_iotest/Makefile \
+                tests/external/hdf5api/config.sh \
+                tests/external/hdf5api/Makefile \
                 tests/external/openpmd/config.sh \
                 tests/external/openpmd/Makefile \
                 tests/external/qmcpack/config.sh \
@@ -793,7 +793,7 @@ fi
 echo "\
 
    External test programs:
-              hdf5-iotest    - ${have_hdf5io}
+              hdf5api        - ${have_hdf5api}
               NetCDF-4       - ${have_netcdf4}
               QMCPACK        - ${have_qmcpack}
               OpenPMD        - ${have_openpmd}

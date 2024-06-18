@@ -12,19 +12,19 @@ if ENABLE_SHARED
 if HAVE_QMCPACK
     C_SUBDIRS += qmcpack
 endif
-if HAVE_HDF5_IOTEST
-    C_SUBDIRS += hdf5_iotest
+if HAVE_HDF5API
+    C_SUBDIRS += hdf5api
 endif
 if HAVE_OPENPMD
     C_SUBDIRS += openpmd
 endif
 endif
 
-DIST_SUBDIRS = qmcpack hdf5_iotest openpmd
-SUBDIRS = $(C_SUBDIRS)
+#DIST_SUBDIRS = qmcpack hdf5_testAPI openpmd
+#SUBDIRS = $(C_SUBDIRS)
 
 ptest:
-	@for d in $(SUBDIRS) ; do \
+	@for d in $(C_SUBDIRS) ; do \
 		$(MAKE) $(MFLAGS) -C $$d ptest $$* || exit 1 ; \
 	done
 

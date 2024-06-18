@@ -26,6 +26,13 @@
 extern "C" {
 #endif
 
+/* Capability flags for the VOL LOG connector */
+#define H5VL_VOL_LOG_CAP_FLAGS    \
+    H5VL_CAP_FLAG_FILE_BASIC      \
+    | H5VL_CAP_FLAG_ATTR_BASIC    \
+    | H5VL_CAP_FLAG_DATASET_BASIC
+       
+
 // Constants
 #define LOG_VOL_BSIZE_UNLIMITED -1
 #define H5S_CONTIG \

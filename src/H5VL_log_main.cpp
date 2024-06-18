@@ -26,7 +26,7 @@ const H5VL_class_t H5VL_log_g = {H5VL_log_APIVER,                    /* version 
                                  (H5VL_class_value_t)H5VL_log_REGID, /* value        */
                                  H5VL_log_NAME,                      /* name         */
                                  0,                 /* Version # of connector                   */
-                                 0,                 /* capability flags */
+                                 0, /* Connector capability flags */
                                  H5VL_log_init,     /* initialize   */
                                  H5VL_log_obj_term, /* terminate    */
                                  H5VL_log_info_g,

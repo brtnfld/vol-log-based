@@ -10,9 +10,9 @@ AM_CPPFLAGS = -I${srcdir}
 AM_CPPFLAGS += -I${top_srcdir}
 AM_CPPFLAGS += -I${top_srcdir}/src
 AM_CPPFLAGS += -I${top_srcdir}/tests
-AM_CPPFLAGS += -I${top_builddir}
-AM_CPPFLAGS += -I${top_builddir}/src
-LDADD = $(top_builddir)/src/libH5VL_log.la
+AM_CPPFLAGS += -I${abs_top_builddir}
+AM_CPPFLAGS += -I${abs_top_builddir}/src
+LDADD = $(abs_top_builddir)/src/libH5VL_log.la
 
 EXTRA_DIST = test.sh config.sh.in hdf5_iotest.m4
 
@@ -23,7 +23,7 @@ EXTRA_DIST = test.sh config.sh.in hdf5_iotest.m4
 # AM_TESTS_ENVIRONMENT += export TESTOUTDIR="$(TESTOUTDIR)";
 TESTS_ENVIRONMENT  = export SED="$(SED)";
 TESTS_ENVIRONMENT += export srcdir="$(srcdir)";
-TESTS_ENVIRONMENT += export top_builddir="$(top_builddir)";
+TESTS_ENVIRONMENT += export abs_top_builddir="$(abs_top_builddir)";
 TESTS_ENVIRONMENT += export TESTOUTDIR="$(TESTOUTDIR)";
 TESTS_ENVIRONMENT += export TESTSEQRUN="$(TESTSEQRUN)";
 TESTS_ENVIRONMENT += export TESTMPIRUN="$(TESTMPIRUN)";
@@ -35,15 +35,15 @@ TESTS_ENVIRONMENT += export HDF5_LIB_PATH="${HDF5_LIB_PATH}";
 CLEANFILES = hdf5_iotest hdf5_iotest.ini hdf5_iotest.log \
              core core.* *.gcda *.gcno *.gcov gmon.out *.h5 *.csv *.log *.ini
 
-check_PROGRAMS = hdf5_iotest
+#check_PROGRAMS = hdf5_iotest
 
-hdf5_iotest_SOURCES =
+#hdf5_iotest_SOURCES =
 
 TESTS = test.sh
 
-hdf5_iotest$(EXEEXT):
-	cd build && $(MAKE) -j4
-	cp build/src/hdf5_iotest .
+#hdf5_iotest$(EXEEXT):
+#	cd build && $(MAKE) -j4
+#	cp build/src/hdf5_iotest .
 
 ptest: $(check_PROGRAMS)
 	@echo "============================================================================"

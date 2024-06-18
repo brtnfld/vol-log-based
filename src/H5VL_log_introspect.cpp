@@ -62,6 +62,7 @@ herr_t H5VL_log_introspect_get_cap_flags (const void *info, uint64_t *cap_flags)
     // return 0;
 
     err = H5VLintrospect_get_cap_flags (ip->under_vol_info, ip->uvlid, cap_flags);
+    *cap_flags = *cap_flags & ~(H5VL_CAP_FLAG_MOUNT);
 
     return err;
 } /* end H5VL_log_introspect_get_cap_flags() */
