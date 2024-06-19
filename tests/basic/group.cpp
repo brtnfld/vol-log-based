@@ -16,6 +16,7 @@
 #endif
 
 #define N 10
+uint64_t vol_cap_flags_g   = H5VL_CAP_FLAG_NONE;
 
 int main (int argc, char **argv) {
     int err, nerrs = 0;
@@ -66,6 +67,11 @@ int main (int argc, char **argv) {
     }
 #endif
     SHOW_TEST_INFO ("Creating groups")
+
+        printf("H5Pget_vol_cap_flags\n");
+        vol_cap_flags_g = H5VL_CAP_FLAG_NONE;
+        err = H5Pget_vol_cap_flags(faplid, &vol_cap_flags_g);
+        CHECK_ERR (err)
 
     // Create file
     fid = H5Fcreate (file_name, H5F_ACC_TRUNC, H5P_DEFAULT, faplid);

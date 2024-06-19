@@ -26,11 +26,13 @@
 extern "C" {
 #endif
 
-/* Capability flags for the VOL LOG connector */
-#define H5VL_VOL_LOG_CAP_FLAGS    \
-    H5VL_CAP_FLAG_FILE_BASIC      \
+/* List of Skipped Capability tests for the VOL LOG connector */
+#define H5VL_VOL_LOG_CAP_FLAGS_SKIP \
+    H5VL_CAP_FLAG_MOUNT           \
     | H5VL_CAP_FLAG_ATTR_BASIC    \
-    | H5VL_CAP_FLAG_DATASET_BASIC
+    | H5VL_CAP_FLAG_FILE_BASIC \
+    | H5VL_CAP_FLAG_LINK_BASIC \
+    | H5VL_CAP_FLAG_OBJECT_BASIC
        
 
 // Constants
