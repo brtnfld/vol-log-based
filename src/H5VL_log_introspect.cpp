@@ -33,7 +33,7 @@ herr_t H5VL_log_introspect_get_conn_cls (void *obj,
                                          const H5VL_class_t **conn_cls) {
     herr_t err         = 0;
     H5VL_log_obj_t *op = (H5VL_log_obj_t *)obj;
-    abort();
+
     /* Check for querying this connector's class */
     if (lvl == H5VL_GET_CONN_LVL_CURR) {
         *conn_cls = &H5VL_log_g;
@@ -60,9 +60,6 @@ herr_t H5VL_log_introspect_get_cap_flags (const void *info, uint64_t *cap_flags)
 
     //*supported = 0;
     // return 0;
-
-    printf("***H5VL_log_introspect_get_cap_flags***\n");
-    abort();
 
     err = H5VLintrospect_get_cap_flags (ip->under_vol_info, ip->uvlid, cap_flags);
     *cap_flags = *cap_flags & ~(H5VL_VOL_LOG_CAP_FLAGS_SKIP);

@@ -665,7 +665,7 @@ err_out:;
 herr_t H5VL_log_dataset_close (void *dset, hid_t dxpl_id, void **req) {
     herr_t err          = 0;
     H5VL_log_dset_t *dp = (H5VL_log_dset_t *)dset;
-    // H5VL_log_dset_info_t *dip = dp->fp->dsets_info[dp->id];	 // Dataset info
+    H5VL_log_dset_info_t *dip = dp->fp->dsets_info[dp->id];	 // Dataset info
 
     try {
 #ifdef LOGVOL_DEBUG
@@ -691,8 +691,12 @@ herr_t H5VL_log_dataset_close (void *dset, hid_t dxpl_id, void **req) {
                 delete dp->fp->mreqs[dp->id];
                 dp->fp->mreqs[dp->id] = NULL;
         }
-        H5Tclose (dip->dtype);
         */
+
+        if(dip->dtype != H5I_INVALID_HID) {
+          H5Tclose (dip->dtype);
+          dip->dtype = H5I_INVALID_HID;
+        }
 
         H5VL_LOGI_PROFILING_TIMER_STOP (dp->fp, TIMER_H5VL_LOG_DATASET_CLOSE);
 

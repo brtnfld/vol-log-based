@@ -23,7 +23,8 @@ set -e
 export HDF5_VOL_CONNECTOR="LOG under_vol=0;under_info={}"
 export HDF5_PLUGIN_PATH="${abs_top_builddir}/src/.libs"
 
-echo "HDFDLKFJ ${HDF5_PLUGIN_PATH}"
+echo 'export HDF5_VOL_CONNECTOR="LOG under_vol=0;under_info={}"'
+echo 'export HDF5_PLUGIN_PATH=${abs_top_builddir}/src/.libs/'
 
 cd hdf5/build
 

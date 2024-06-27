@@ -119,6 +119,9 @@ void H5VL_log_filei_post_open (H5VL_log_file_t *fp) {
 
     H5VL_LOGI_PROFILING_TIMER_START;
 
+    // Reset hdf5 context to allow group operations within a file operation
+    H5VL_logi_reset_lib_stat (lib_state);
+
     // check for exisitence of __int_att;
     // if inexists, mark as regular file and return directly.
     exists = H5VL_logi_exists_att (fp, H5VL_LOG_FILEI_ATTR, fp->dxplid);
@@ -163,9 +166,6 @@ void H5VL_log_filei_post_open (H5VL_log_file_t *fp) {
         fp->subname = std::string (fp->name);
     }
     H5VL_LOGI_PROFILING_TIMER_STOP (fp, TIMER_H5VL_LOG_FILE_OPEN_SUBFILE);
-
-    // Reset hdf5 context to allow group operations within a file operation
-    H5VL_logi_reset_lib_stat (lib_state);
 
     // Open the LOG group
     loc.obj_type = H5I_FILE;
@@ -773,7 +773,7 @@ void H5VL_log_filei_close (H5VL_log_file_t *fp) {
     CHECK_ERR
     H5VL_LOGI_PROFILING_TIMER_STOP (fp, TIMER_H5VLGROUP_CLOSE);
 
-    H5VL_logi_restore_lib_stat (lib_state);
+  ////  H5VL_logi_restore_lib_stat (lib_state);
 
 #ifdef LOGVOL_PROFILING
     {
