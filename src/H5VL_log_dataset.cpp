@@ -211,7 +211,15 @@ void *H5VL_log_dataset_create (void *obj,
     goto fn_exit;
 err_out:;
     if (dp) {
-        if (dip) { delete dip; }
+        if (dip) { 
+          if(dip->dtype > 0)
+            H5Tclose(dip->dtype);
+          if (NULL != dp->uo) {
+            H5VLdataset_close(dp->uo,op->uvlid,dxpl_id, ureqp);
+          }
+          free(dip->fill);
+          delete dip;
+        }
         delete dp;
         dp = NULL;
     }
