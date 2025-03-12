@@ -73,6 +73,7 @@ jobs:
             wget -cq https://github.com/HDFGroup/hdf5/releases/latest/download/hdf5.tar.gz
             tar -zxf hdf5.tar.gz
             cd hdf5-*
+            mkdir build; cd build
             cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/HDF5 \
                -DHDF5_ENABLE_PARALLEL=ON \
                -DCMAKE_BUILD_TYPE=Release \
@@ -80,7 +81,7 @@ jobs:
                -DHDF5_ENABLE_THREADSAFE=ON \
                -DBUILD_TESTING=OFF \
                -DBUILD_STATIC_LIBS=OFF \
-               -DCMAKE_C_COMPILER=${GITHUB_WORKSPACE}/MPICH/bin/mpicc .
+               -DCMAKE_C_COMPILER=${GITHUB_WORKSPACE}/MPICH/bin/mpicc ..
             make -s LIBTOOLFLAGS=--silent V=1 -j 4 install > qout 2>&1
             make -s -j 4 distclean >> qout 2>&1
         - name: Install NetCDF
