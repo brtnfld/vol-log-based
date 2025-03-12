@@ -174,7 +174,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install automake autoconf libtool libtool-bin m4 uuid-dev
             # The MPICH installed on github actions is too slow
-            # sudo apt-get install mpich
+            # sudo apt-get install mpich cmake automake autoconf libtool libtool-bin m4 uuid-dev 
             # mpicc -v
             # zlib
             sudo apt-get install zlib1g-dev
