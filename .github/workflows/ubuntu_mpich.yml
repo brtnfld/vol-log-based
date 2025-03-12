@@ -73,7 +73,6 @@ jobs:
             wget -cq https://github.com/HDFGroup/hdf5/releases/latest/download/hdf5.tar.gz
             tar -zxf hdf5.tar.gz
             cd hdf5-*
-            
             cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/HDF5 \
                -DHDF5_ENABLE_PARALLEL=ON \
                -DCMAKE_BUILD_TYPE=Release \
@@ -83,8 +82,6 @@ jobs:
                -DBUILD_STATIC_LIBS=OFF \
                -DCMAKE_C_COMPILER=${GITHUB_WORKSPACE}/MPICH/bin/mpicc .
 #               -DHDF5_BUILD_EXAMPLES=OFF -DHDF5_BUILD_TOOLS:BOOL=OFF \
-               
-
 #            ./configure --prefix=${GITHUB_WORKSPACE}/HDF5 \
 #                        --silent \
 #                        --enable-parallel \
