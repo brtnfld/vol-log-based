@@ -77,7 +77,7 @@ jobs:
             cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/HDF5 \
                -DHDF5_ENABLE_PARALLEL=ON \
                -DCMAKE_BUILD_TYPE=Release \
-               -DHDF5_ALLOW_UNSUPPORTED=ON \
+               -DALLOW_UNSUPPORTED=ON \
                -DHDF5_ENABLE_THREADSAFE=ON \
                -DBUILD_TESTING=OFF \
                -DBUILD_STATIC_LIBS=OFF \
@@ -199,23 +199,16 @@ jobs:
             rm -rf HDF5 ; mkdir HDF5
             git clone --single-branch --branch develop https://github.com/HDFGroup/hdf5.git 
             cd hdf5
-            ./autogen.sh
-            ./configure --prefix=${GITHUB_WORKSPACE}/HDF5 \
-                        --silent \
-                        --enable-parallel \
-                        --enable-build-mode=production \
-                        --enable-unsupported \
-                        --enable-threadsafe \
-                        --disable-doxygen-doc \
-                        --disable-doxygen-man \
-                        --disable-doxygen-html \
-                        --disable-tests \
-                        --disable-fortran \
-                        --disable-cxx \
-                        --enable-shared --disable-static \
-                        CC=${GITHUB_WORKSPACE}/MPICH/bin/mpicc
-            make -s LIBTOOLFLAGS=--silent V=1 -j 4 install > qout 2>&1
-            make -s -j 4 distclean >> qout 2>&1
+            mkdir build; cd build
+            cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/HDF5 \
+               -DHDF5_ENABLE_PARALLEL=ON \
+               -DCMAKE_BUILD_TYPE=Release \
+               -DALLOW_UNSUPPORTED=ON \
+               -DHDF5_ENABLE_THREADSAFE=ON \
+               -DBUILD_TESTING=OFF \
+               -DBUILD_STATIC_LIBS=OFF \
+               -DCMAKE_C_COMPILER=${GITHUB_WORKSPACE}/MPICH/bin/mpicc ..
+            make -j2 install
         - name: Install NetCDF
           run: |
             cd ${GITHUB_WORKSPACE}
