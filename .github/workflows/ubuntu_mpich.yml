@@ -77,8 +77,6 @@ jobs:
                -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${GITHUB_WORKSPACE}/MPICH/bin/mpicc ..
             make -j2 install
             echo "OS_NAME=linux" >> $GITHUB_ENV
-            echo "FC=mpif90" >> $GITHUB_ENV
-            echo "F77=mpif90" >> $GITHUB_ENV
             echo "LD_LIBRARY_PATH=${{ github.workspace }}/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
 
         - name: Install NetCDF
@@ -93,6 +91,7 @@ jobs:
             tar -zxf v${NETCDF_VERSION}.tar.gz
             cd netcdf-c-${NETCDF_VERSION}
             export LD_LIBRARY_PATH=${GITHUB_WORKSPACE}/HDF5/lib:$LD_LIBRARY_PATH
+            ls -aolF ${GITHUB_WORKSPACE}/HDF5/lib
             echo "END3"
             echo $LD_LIBRARY_PATH
             echo "END4"
