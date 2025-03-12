@@ -81,6 +81,7 @@ jobs:
                -DHDF5_ENABLE_THREADSAFE=ON \
                -DBUILD_TESTING=OFF \
                -DBUILD_STATIC_LIBS=OFF \
+               -DHDF5_ENABLE_ZLIB_SUPPORT=ON \
                -DCMAKE_C_COMPILER=${GITHUB_WORKSPACE}/MPICH/bin/mpicc ..
             make -j2 install
         - name: Install NetCDF
@@ -207,6 +208,7 @@ jobs:
                -DHDF5_ENABLE_THREADSAFE=ON \
                -DBUILD_TESTING=OFF \
                -DBUILD_STATIC_LIBS=OFF \
+               -DHDF5_ENABLE_ZLIB_SUPPORT=ON \
                -DCMAKE_C_COMPILER=${GITHUB_WORKSPACE}/MPICH/bin/mpicc ..
             make -j2 install
         - name: Install NetCDF
