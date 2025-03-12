@@ -84,6 +84,7 @@ jobs:
                -DHDF5_ENABLE_ZLIB_SUPPORT=ON \
                -DCMAKE_C_COMPILER=${GITHUB_WORKSPACE}/MPICH/bin/mpicc ..
             make -j2 install
+            echo "LD_LIBRARY_PATH=${{ github.workspace }}/HDF5/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
         - name: Install NetCDF
           run: |
             cd ${GITHUB_WORKSPACE}
@@ -211,6 +212,7 @@ jobs:
                -DHDF5_ENABLE_ZLIB_SUPPORT=ON \
                -DCMAKE_C_COMPILER=${GITHUB_WORKSPACE}/MPICH/bin/mpicc ..
             make -j2 install
+            echo "LD_LIBRARY_PATH=${{ github.workspace }}/HDF5/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
         - name: Install NetCDF
           run: |
             cd ${GITHUB_WORKSPACE}
